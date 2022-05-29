@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottomSheet"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
     <EditText
         android:id="@+id/enter_todo_et"
@@ -64,7 +65,7 @@
         android:id="@+id/tomorrow_chip"
         android:layout_width="269dp"
         android:layout_height="41dp"
-        android:text="tomorrow"
+        android:text="Tomorrow"
         app:chipIcon="@drawable/ic_baseline_wb_sunny_24"
         app:layout_constraintEnd_toEndOf="@+id/next_week_chip"
         app:layout_constraintHorizontal_bias="1.0"
@@ -76,7 +77,7 @@
         android:layout_width="272dp"
         android:layout_height="41dp"
         android:background="@android:color/transparent"
-        android:text="next_week"
+        android:text="Next week"
         app:chipIcon="@drawable/ic_baseline_next_week_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -87,7 +88,7 @@
         android:layout_width="267dp"
         android:layout_height="41dp"
         android:layout_marginTop="2dp"
-        android:text="today"
+        android:text="Today"
         app:chipIcon="@drawable/ic_baseline_today_24"
         app:layout_constraintEnd_toEndOf="@+id/tomorrow_chip"
         app:layout_constraintStart_toStartOf="@+id/tomorrow_chip"
@@ -99,7 +100,7 @@
         android:layout_height="33dp"
         android:layout_marginTop="48dp"
         android:gravity="center_horizontal"
-        android:text="due_date_text"
+        android:text="Deadline"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -136,7 +137,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#C91517"
-            android:text="radio_high" />
+            android:text="High" />
 
         <RadioButton
             android:id="@+id/radioButton_med"
@@ -144,7 +145,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#FFB300"
-            android:text="radio_med" />
+            android:text="Medium" />
 
         <RadioButton
             android:id="@+id/radioButton_low"
@@ -152,7 +153,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/holo_blue_light"
-            android:text="radio_low" />
+            android:text="Low" />
     </RadioGroup>
 
     <androidx.constraintlayout.widget.Group

@@ -13,7 +13,7 @@
         <entry key="..\:/github/ToDoListAndroid/app/src/main/res/drawable/ic_launcher_background.xml" value="0.14" />
         <entry key="..\:/github/ToDoListAndroid/app/src/main/res/layout/activity_about.xml" value="0.14722222222222223" />
         <entry key="..\:/github/ToDoListAndroid/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
-        <entry key="..\:/github/ToDoListAndroid/app/src/main/res/layout/bottom_sheet.xml" value="0.36666666666666664" />
+        <entry key="..\:/github/ToDoListAndroid/app/src/main/res/layout/bottom_sheet.xml" value="0.1" />
         <entry key="..\:/github/ToDoListAndroid/app/src/main/res/layout/fragment_bottom_sheet.xml" value="0.28398547801532875" />
         <entry key="..\:/github/ToDoListAndroid/app/src/main/res/layout/todo_row.xml" value="0.358695652173913" />
         <entry key="..\:/github/ToDoListAndroid/app/src/main/res/menu/menu_main.xml" value="0.33" />
@@ -25,5 +25,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.36666666666666664" />
+      </ProjectState>
+    </option>
   </component>
 </project>

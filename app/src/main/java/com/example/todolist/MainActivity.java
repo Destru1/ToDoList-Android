@@ -2,6 +2,8 @@ package com.example.todolist;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toolbar;
 
+import com.example.todolist.adapter.RecyclerViewAdapter;
 import com.example.todolist.model.Priority;
 import com.example.todolist.model.Task;
 import com.example.todolist.model.TaskViewModel;
@@ -20,13 +23,24 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity {
 
     private TaskViewModel viewModel;
+    private RecyclerView recyclerView;
+    private RecyclerViewAdapter recyclerViewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         viewModel = new ViewModelProvider.AndroidViewModelFactory(MainActivity.this.getApplication()).create(TaskViewModel.class);
+
+        viewModel.getAllTasks().observe(this, tasks -> {
+            recyclerViewAdapter = new RecyclerViewAdapter(tasks);
+            recyclerView.setAdapter(recyclerViewAdapter);
+        });
 
         FloatingActionButton fab =findViewById(R.id.addButton);
         fab.setOnClickListener(new View.OnClickListener() {

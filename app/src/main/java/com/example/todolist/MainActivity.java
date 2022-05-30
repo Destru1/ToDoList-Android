@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toolbar;
 
+import com.example.todolist.adapter.OnToDoListClickListener;
 import com.example.todolist.adapter.RecyclerViewAdapter;
 import com.example.todolist.model.Priority;
 import com.example.todolist.model.Task;
@@ -22,7 +23,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnToDoListClickListener {
 
     private TaskViewModel viewModel;
     private RecyclerView recyclerView;
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider.AndroidViewModelFactory(MainActivity.this.getApplication()).create(TaskViewModel.class);
 
         viewModel.getAllTasks().observe(this, tasks -> {
-            recyclerViewAdapter = new RecyclerViewAdapter(tasks);
+            recyclerViewAdapter = new RecyclerViewAdapter(tasks,this);
             recyclerView.setAdapter(recyclerViewAdapter);
         });
 
@@ -88,5 +89,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onTodoClick(int adapterPosition, Task task) {
+
     }
 }

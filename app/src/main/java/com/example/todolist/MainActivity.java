@@ -15,6 +15,7 @@ import android.widget.Toolbar;
 import com.example.todolist.adapter.OnToDoListClickListener;
 import com.example.todolist.adapter.RecyclerViewAdapter;
 import com.example.todolist.model.Priority;
+import com.example.todolist.model.SharedViewModel;
 import com.example.todolist.model.Task;
 import com.example.todolist.model.TaskViewModel;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -28,7 +29,9 @@ public class MainActivity extends AppCompatActivity implements OnToDoListClickLi
     private TaskViewModel viewModel;
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
-   BottomSheetFragment bottomSheetFragment;
+    BottomSheetFragment bottomSheetFragment;
+    private SharedViewModel sharedViewModel;
+
 
 
     @Override
@@ -47,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements OnToDoListClickLi
 
         viewModel = new ViewModelProvider.AndroidViewModelFactory(MainActivity.this.getApplication()).create(TaskViewModel.class);
 
+        sharedViewModel = new ViewModelProvider(this).get(SharedViewModel.class);
+
         viewModel.getAllTasks().observe(this, tasks -> {
             recyclerViewAdapter = new RecyclerViewAdapter(tasks,this);
             recyclerView.setAdapter(recyclerViewAdapter);
@@ -64,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements OnToDoListClickLi
                 //Snackbar.make(v,"Test",Snackbar.LENGTH_LONG).setAction("Action",null).show();
             }
 
-            private void showBottomSheetDialog() {
+            public void showBottomSheetDialog() {
                 bottomSheetFragment.show(getSupportFragmentManager(),bottomSheetFragment.getTag());
             }
         });
@@ -92,7 +97,17 @@ public class MainActivity extends AppCompatActivity implements OnToDoListClickLi
     }
 
     @Override
-    public void onTodoClick(int adapterPosition, Task task) {
+    public void onTodoClick(Task task) {
+        sharedViewModel.selectItem(task);
+        bottomSheetFragment.show(getSupportFragmentManager(),bottomSheetFragment.getTag());
 
+    }
+
+
+
+    @Override
+    public void onToDoRadioButtonClick(Task task) {
+        TaskViewModel.delete(task);
+        recyclerViewAdapter.notifyDataSetChanged();
     }
 }

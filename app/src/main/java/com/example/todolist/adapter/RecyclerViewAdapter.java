@@ -1,5 +1,7 @@
 package com.example.todolist.adapter;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,8 +39,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
     Task task = taskList.get(position);
     String fromatted = Utils.formatDate(task.getDeadline());
+        ColorStateList colorStateList = new ColorStateList(new int[][]{
+                new int[]{-android.R.attr.state_enabled},
+                new int[]{android.R.attr.state_enabled}
+        },
+            new int[]{
+                    Color.LTGRAY,
+                    Utils.priorityColor(task)
+        });
     holder.task.setText(task.getTask());
     holder.toDoChip.setText(fromatted);
+    holder.toDoChip.setTextColor(Utils.priorityColor(task));
+    holder.toDoChip.setChipIconTint(colorStateList);
+    holder.radioButton.setButtonTintList(colorStateList);
 
     }
 

@@ -39,6 +39,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     String fromatted = Utils.formatDate(task.getDeadline());
     holder.task.setText(task.getTask());
     holder.toDoChip.setText(fromatted);
+
     }
 
     @Override

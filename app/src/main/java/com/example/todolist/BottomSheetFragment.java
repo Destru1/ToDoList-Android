@@ -38,7 +38,7 @@ public class BottomSheetFragment extends BottomSheetDialogFragment implements Vi
     private ImageButton calendarButton;
     private ImageButton priorityButton;
     private RadioGroup priorityRadioGroup;
-    private RadioButton selectedRadioGroup;
+    private RadioButton selectedRadioButton;
     private int selectedButtonId;
     private ImageButton saveButton;
     private CalendarView calendarView;
@@ -47,6 +47,7 @@ public class BottomSheetFragment extends BottomSheetDialogFragment implements Vi
     Calendar calendar = Calendar.getInstance();
     private SharedViewModel sharedViewModel;
     private boolean isEdited;
+    private Priority priority;
 
     public BottomSheetFragment(){
 
@@ -101,21 +102,51 @@ public class BottomSheetFragment extends BottomSheetDialogFragment implements Vi
             Utils.hideKeyboard(v);
         });
 
-        calendarView.setOnDateChangeListener(((view1, year, month, dayOfMonth) -> {
+        calendarView.setOnDateChangeListener((view1, year, month, dayOfMonth) -> {
         calendar.clear();
         calendar.set(year,month,dayOfMonth);
         deadline = calendar.getTime();
-        }) );
+        } );
+
+        priorityButton.setOnClickListener(view3 -> {
+            Utils.hideKeyboard(view3);
+            priorityRadioGroup.setVisibility(
+                    priorityRadioGroup.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+
+            priorityRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+                if (priorityRadioGroup.getVisibility() == View.VISIBLE){
+                    selectedButtonId = checkedId;
+                    selectedRadioButton = view.findViewById(selectedButtonId);
+                    if (selectedRadioButton.getId() == R.id.radioButton_high){
+                        priority = Priority.HIGH;
+                    }
+                    else if (selectedRadioButton.getId() == R.id.radioButton_med){
+                        priority = Priority.MEDIUM;
+                    }
+                    else if(selectedRadioButton.getId() ==R.id.radioButton_low){
+                        priority = Priority.LOW;
+                    }
+                    else {
+                        priority = Priority.LOW;
+                    }
+                }
+                else {
+                    priority = Priority.LOW;
+                }
+            });
+
+        });
+
 
         saveButton.setOnClickListener(v -> {
             String task = enterTask.getText().toString().trim();
-            if (!TextUtils.isEmpty(task) && deadline != null){
-                Task myTask = new Task(task, Priority.HIGH, deadline, Calendar.getInstance().getTime(), false);
+            if (!TextUtils.isEmpty(task) && deadline != null && priority != null){
+                Task myTask = new Task(task, priority, deadline, Calendar.getInstance().getTime(), false);
                 if (isEdited){
                     Task updateTask = sharedViewModel.getSelectedItem().getValue();
                     updateTask.setTask(task);
                     updateTask.setCreatedAt(Calendar.getInstance().getTime());
-                    updateTask.setPriority(Priority.HIGH);
+                    updateTask.setPriority(priority);
                     updateTask.setDeadline(deadline);
                     TaskViewModel.update(updateTask);
                     sharedViewModel.setIsEdited(false);

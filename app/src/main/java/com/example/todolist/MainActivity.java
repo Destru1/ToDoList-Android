@@ -99,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements OnToDoListClickLi
     @Override
     public void onTodoClick(Task task) {
         sharedViewModel.selectItem(task);
+        sharedViewModel.setIsEdited(true);
         bottomSheetFragment.show(getSupportFragmentManager(),bottomSheetFragment.getTag());
 
     }

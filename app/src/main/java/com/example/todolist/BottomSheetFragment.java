@@ -23,6 +23,7 @@ import com.example.todolist.model.Priority;
 import com.example.todolist.model.SharedViewModel;
 import com.example.todolist.model.Task;
 import com.example.todolist.model.TaskViewModel;
+import com.example.todolist.utility.Utils;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.chip.Chip;
 
@@ -45,6 +46,7 @@ public class BottomSheetFragment extends BottomSheetDialogFragment implements Vi
     private Date deadline;
     Calendar calendar = Calendar.getInstance();
     private SharedViewModel sharedViewModel;
+    private boolean isEdited;
 
     public BottomSheetFragment(){
 
@@ -74,19 +76,29 @@ public class BottomSheetFragment extends BottomSheetDialogFragment implements Vi
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (sharedViewModel.getSelectedItem().getValue() != null){
+           isEdited = sharedViewModel.getIsEdited();
+            Task task = sharedViewModel.getSelectedItem().getValue();
+            enterTask.setText(task.getTask());
+            Log.d("MY", "onViewCreated:" + task.getTask());
+
+        }
+    }
+
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
 
-        if (sharedViewModel.getSelectedItem().getValue() != null){
-            Task task = sharedViewModel.getSelectedItem().getValue();
 
-        }
 
         calendarButton.setOnClickListener(v -> {
             calendarGroup.setVisibility(
                     calendarGroup.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+            Utils.hideKeyboard(v);
         });
 
         calendarView.setOnDateChangeListener(((view1, year, month, dayOfMonth) -> {
@@ -99,7 +111,22 @@ public class BottomSheetFragment extends BottomSheetDialogFragment implements Vi
             String task = enterTask.getText().toString().trim();
             if (!TextUtils.isEmpty(task) && deadline != null){
                 Task myTask = new Task(task, Priority.HIGH, deadline, Calendar.getInstance().getTime(), false);
-                TaskViewModel.insert(myTask);
+                if (isEdited){
+                    Task updateTask = sharedViewModel.getSelectedItem().getValue();
+                    updateTask.setTask(task);
+                    updateTask.setCreatedAt(Calendar.getInstance().getTime());
+                    updateTask.setPriority(Priority.HIGH);
+                    updateTask.setDeadline(deadline);
+                    TaskViewModel.update(updateTask);
+                    sharedViewModel.setIsEdited(false);
+                }else
+                {
+                    TaskViewModel.insert(myTask);
+                }
+                enterTask.setText("");
+                if (this.isVisible()){
+                    this.dismiss();
+                }
             }
         });
     }

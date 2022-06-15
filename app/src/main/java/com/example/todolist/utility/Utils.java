@@ -26,13 +26,13 @@ public class Utils {
  public static int priorityColor(Task task){
      int color;
      if (task.getPriority() == Priority.HIGH){
-         color = Color.argb(200,201,21,23);
+         color = Color.argb(200,231,65,65);
      }
      else if (task.getPriority() == Priority.MEDIUM){
-         color = Color.argb(200,155,179,0);
+         color = Color.argb(200,67,164,7);
      }
      else {
-         color = Color.argb(200,51,181,129);
+         color = Color.argb(200,93,163,243);
      }
      return color;
  }

@@ -25,7 +25,7 @@
         android:id="@+id/priority_todo_button"
         android:layout_width="77dp"
         android:layout_height="46dp"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="12dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/image_description"
@@ -35,16 +35,16 @@
 
     <ImageButton
         android:id="@+id/save_todo_button"
-        android:layout_width="70dp"
-        android:layout_height="72dp"
-        android:layout_marginTop="84dp"
+        android:layout_width="80dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="72dp"
         android:layout_marginEnd="36dp"
         android:background="@android:color/transparent"
         android:contentDescription="TODO"
         android:scaleX="0.4"
         android:scaleY="0.4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.78"
+        app:layout_constraintHorizontal_bias="0.708"
         app:layout_constraintStart_toEndOf="@+id/priority_todo_button"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_arrow_circle_up_24" />
@@ -136,7 +136,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#C91517"
+            android:background=" #e74141"
             android:text="High" />
 
         <RadioButton
@@ -144,7 +144,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#FFB300"
+            android:background="#43a407"
             android:text="Medium" />
 
         <RadioButton
@@ -152,7 +152,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/holo_blue_light"
+            android:background="#5DA3F3"
             android:text="Low" />
     </RadioGroup>
 

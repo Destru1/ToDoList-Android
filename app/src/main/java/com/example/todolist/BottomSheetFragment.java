@@ -1,13 +1,6 @@
 package com.example.todolist;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.Group;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +12,10 @@ import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.Group;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.todolist.model.Priority;
 import com.example.todolist.model.SharedViewModel;
 import com.example.todolist.model.Task;
@@ -26,11 +23,10 @@ import com.example.todolist.model.TaskViewModel;
 import com.example.todolist.utility.Utils;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.chip.Chip;
+import com.google.android.material.snackbar.Snackbar;
 
-import java.security.Security;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 
 public class BottomSheetFragment extends BottomSheetDialogFragment implements View.OnClickListener {
@@ -49,9 +45,11 @@ public class BottomSheetFragment extends BottomSheetDialogFragment implements Vi
     private boolean isEdited;
     private Priority priority;
 
+
     public BottomSheetFragment(){
 
     }
+
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
@@ -67,6 +65,7 @@ public class BottomSheetFragment extends BottomSheetDialogFragment implements Vi
         saveButton = view.findViewById(R.id.save_todo_button);
         priorityButton = view.findViewById(R.id.priority_todo_button);
         priorityRadioGroup = view.findViewById(R.id.radioGroup_priority);
+
 
         Chip todayChip = view.findViewById(R.id.today_chip);
         todayChip.setOnClickListener(this);
@@ -93,6 +92,7 @@ public class BottomSheetFragment extends BottomSheetDialogFragment implements Vi
         super.onViewCreated(view, savedInstanceState);
 
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+
 
 
 
@@ -140,7 +140,7 @@ public class BottomSheetFragment extends BottomSheetDialogFragment implements Vi
 
         saveButton.setOnClickListener(v -> {
             String task = enterTask.getText().toString().trim();
-            if (!TextUtils.isEmpty(task) && deadline != null && priority != null){
+            if (!TextUtils.isEmpty(task) && deadline != null){
                 Task myTask = new Task(task, priority, deadline, Calendar.getInstance().getTime(), false);
                 if (isEdited){
                     Task updateTask = sharedViewModel.getSelectedItem().getValue();
@@ -155,8 +155,13 @@ public class BottomSheetFragment extends BottomSheetDialogFragment implements Vi
                     TaskViewModel.insert(myTask);
                 }
                 enterTask.setText("");
+                priority = null;
                 if (this.isVisible()){
                     this.dismiss();
+                }
+                else {
+                    Snackbar.make(saveButton, "Empty",Snackbar.LENGTH_LONG)
+                            .show();
                 }
             }
         });

@@ -3,8 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/orderByDeadline"
+        android:orderInCategory="100"
+        android:title="Order by deadline"
+      /><item
+        android:id="@+id/orderByPriority"
+        android:orderInCategory="100"
+        android:title="Order by priority"
+      /> /><item
+        android:id="@+id/creationDate"
+        android:orderInCategory="100"
+        android:title="Order by date created"
+      />
+    <item
+        android:id="@+id/aboutMenu"
         android:orderInCategory="100"
         android:title="About"
-        app:showAsAction="never" />
+        />
+
 </menu>

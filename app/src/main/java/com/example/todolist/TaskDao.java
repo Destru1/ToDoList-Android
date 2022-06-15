@@ -31,5 +31,11 @@ public interface TaskDao {
 
     @Delete
     void delete(Task task);
+
+    @Query("SELECT * FROM task_table ORDER BY deadline")
+    LiveData<List<Task>> orderByDeadline();
+
+    @Query("SELECT * FROM task_table WHERE priority in(\"HIGH\",\"MEDIUM\",\"LOW\") ORDER BY priority")
+    LiveData<List<Task>> orderByPriority();
 }
 

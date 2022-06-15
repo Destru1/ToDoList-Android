@@ -6,6 +6,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,6 +42,8 @@ public class MainActivity extends AppCompatActivity implements OnToDoListClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         bottomSheetFragment = new BottomSheetFragment();
         ConstraintLayout constraintLayout = findViewById(R.id.bottomSheet);
         BottomSheetBehavior<ConstraintLayout> bottomSheetBehavior = BottomSheetBehavior.from(constraintLayout);
@@ -62,7 +67,10 @@ public class MainActivity extends AppCompatActivity implements OnToDoListClickLi
             @Override
             public void onClick(View v) {
 
+
                 showBottomSheetDialog();
+
+
 
                // Task task = new Task("Todo", Priority.HIGH, Calendar.getInstance().getTime(),Calendar.getInstance().getTime(),false);
                 //TaskViewModel.insert(task);
@@ -71,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements OnToDoListClickLi
 
             public void showBottomSheetDialog() {
                 bottomSheetFragment.show(getSupportFragmentManager(),bottomSheetFragment.getTag());
+
             }
         });
 
@@ -89,9 +98,29 @@ public class MainActivity extends AppCompatActivity implements OnToDoListClickLi
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.orderByDeadline) {
+            viewModel.orderByDeadline.observe(this, tasks -> {
+                recyclerViewAdapter = new RecyclerViewAdapter(tasks,this);
+                recyclerView.setAdapter(recyclerViewAdapter);
+            });
             return true;
         }
+        else if (id == R.id.orderByPriority) {
+            viewModel.orderByPriority.observe(this, tasks -> {
+                recyclerViewAdapter = new RecyclerViewAdapter(tasks, this);
+                recyclerView.setAdapter(recyclerViewAdapter);
+            });
+            return true;
+        }
+        else if (id == R.id.creationDate){
+            viewModel.getAllTasks().observe(this, tasks -> {
+                recyclerViewAdapter = new RecyclerViewAdapter(tasks, this);
+                recyclerView.setAdapter(recyclerViewAdapter);
+            });
+            return true;
+        }
+
+
 
         return super.onOptionsItemSelected(item);
     }

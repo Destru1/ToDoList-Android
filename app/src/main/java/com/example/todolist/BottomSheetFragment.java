@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.Group;
@@ -149,10 +150,14 @@ public class BottomSheetFragment extends BottomSheetDialogFragment implements Vi
                     updateTask.setPriority(priority);
                     updateTask.setDeadline(deadline);
                     TaskViewModel.update(updateTask);
+                    Toast toast = Toast.makeText(getContext(),"Task updated",Toast.LENGTH_SHORT);
+                    toast.show();
                     sharedViewModel.setIsEdited(false);
                 }else
                 {
                     TaskViewModel.insert(myTask);
+                    Toast toast = Toast.makeText(getContext(),"Task created",Toast.LENGTH_SHORT);
+                    toast.show();
                 }
                 enterTask.setText("");
                 priority = null;

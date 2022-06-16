@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity implements OnToDoListClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         bottomSheetFragment = new BottomSheetFragment();
         ConstraintLayout constraintLayout = findViewById(R.id.bottomSheet);

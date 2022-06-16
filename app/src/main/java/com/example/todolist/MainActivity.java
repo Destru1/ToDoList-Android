@@ -111,15 +111,17 @@ public class MainActivity extends AppCompatActivity implements OnToDoListClickLi
             });
             return true;
         }
-        else if (id == R.id.creationDate){
+        else if (id == R.id.creationDate) {
             viewModel.getAllTasks().observe(this, tasks -> {
                 recyclerViewAdapter = new RecyclerViewAdapter(tasks, this);
                 recyclerView.setAdapter(recyclerViewAdapter);
             });
             return true;
         }
-
-
+        else if (id == R.id.aboutMenu){
+            Intent intent = new Intent(getApplicationContext(),AboutActivity.class);
+            startActivity(intent);
+        }
 
         return super.onOptionsItemSelected(item);
     }

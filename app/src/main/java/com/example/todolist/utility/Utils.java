@@ -31,8 +31,11 @@ public class Utils {
      else if (task.getPriority() == Priority.MEDIUM){
          color = Color.argb(200,67,164,7);
      }
-     else {
+     else if (task.getPriority() == Priority.LOW){
          color = Color.argb(200,93,163,243);
+     }
+     else {
+         color = Color.argb(60,0,0,0);
      }
      return color;
  }

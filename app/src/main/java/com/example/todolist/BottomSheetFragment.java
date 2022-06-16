@@ -127,11 +127,11 @@ public class BottomSheetFragment extends BottomSheetDialogFragment implements Vi
                         priority = Priority.LOW;
                     }
                     else {
-                        priority = Priority.LOW;
+                        priority = Priority.NULL;
                     }
                 }
                 else {
-                    priority = Priority.LOW;
+                    priority = Priority.NULL;
                 }
             });
 

@@ -35,7 +35,7 @@ public interface TaskDao {
     @Query("SELECT * FROM task_table ORDER BY deadline")
     LiveData<List<Task>> orderByDeadline();
 
-    @Query("SELECT * FROM task_table WHERE priority in(\"HIGH\",\"MEDIUM\",\"LOW\") ORDER BY priority")
+    @Query("SELECT * FROM task_table ORDER BY priority LIKE \"HIGH%\" DESC")
     LiveData<List<Task>> orderByPriority();
 }
 

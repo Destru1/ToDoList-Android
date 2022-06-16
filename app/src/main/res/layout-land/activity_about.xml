@@ -5,9 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AboutActivity">
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
@@ -17,8 +15,8 @@
         android:id="@+id/welcomeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="108dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginStart="256dp"
+        android:layout_marginTop="60dp"
         android:text="Welcome to ToDoList"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -27,8 +25,8 @@
 
     <TextView
         android:id="@+id/createTextView"
-        android:layout_width="409dp"
-        android:layout_height="96dp"
+        android:layout_width="702dp"
+        android:layout_height="67dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="304dp"
         android:text="How to use the app: \n Click on the plus button on the right hand side to open the create section. Then enter a title, select a date and choose priority(optional). After that press the save button to save the task."
@@ -51,8 +49,8 @@
         android:id="@+id/manualText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="320dp"
+        android:layout_marginTop="44dp"
         android:text="Manual"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +60,7 @@
         android:id="@+id/newTaskText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
         android:text="Add new task"
         app:layout_constraintStart_toEndOf="@+id/createImage"

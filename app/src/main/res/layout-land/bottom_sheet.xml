@@ -130,6 +130,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background=" #e74141"
+            android:buttonTint="#A3000000"
             android:text="High" />
 
         <RadioButton
@@ -138,6 +139,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#43a407"
+            android:buttonTint="#A3000000"
             android:text="Medium" />
 
         <RadioButton
@@ -146,6 +148,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#5DA3F3"
+            android:buttonTint="#A3000000"
             android:text="Low" />
     </RadioGroup>
 

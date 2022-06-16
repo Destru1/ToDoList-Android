@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">ToDoList</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="enter_todo_hint">enter_todo_hint</string>
     <string name="image_description">image_description</string>
